@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techtrends
+  namespace: sandbox # Penting: men-deploy ke namespace sandbox
+spec:
+  replicas: 1 # Jumlah Pod yang ingin kita jalankan
+  selector:
+    matchLabels:
+      app: techtrends # Selector untuk mengidentifikasi Pod yang dikelola Deployment ini
+  template:
+    metadata:
+      labels:
+        app: techtrends # Label yang akan diterapkan ke Pod
+    spec:
+      containers:
+      - name: techtrends # Nama container di dalam Pod
+        image: YOUR_DOCKERHUB_USERNAME/techtrends:latest # GANTI INI DENGAN USERNAME DOCKERHUB-MU!
+        ports:
+        - containerPort: 3111 # Port di dalam container
+        resources: # Permintaan dan batasan sumber daya untuk container
+          requests:
+            cpu: 250m # 250 milli-cores (1/4 dari 1 CPU core)
+            memory: 64Mi # 64 Megabytes
+          limits:
+            cpu: 500m # 500 milli-cores (1/2 dari 1 CPU core)
+            memory: 128Mi # 128 Megabytes
+        livenessProbe: # Probe untuk memeriksa apakah container masih hidup
+          httpGet:
+            path: /healthz
+            port: 3111
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe: # Probe untuk memeriksa apakah container siap menerima traffic
+          httpGet:
+            path: /healthz
+            port: 3111
+          initialDelaySeconds: 5
+          periodSeconds: 10
