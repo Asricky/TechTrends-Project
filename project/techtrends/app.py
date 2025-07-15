@@ -1,5 +1,8 @@
 import sqlite3
+import logging
+import sys
 
+from prometheus_client import Counter, generate_latest
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
@@ -20,7 +23,20 @@ def get_post(post_id):
 
 # Define the Flask application
 app = Flask(__name__)
+
+# Initialize Metrics
+db_connection_count = Counter('db_connection_count', 'Number of database connections')
+post_views_total = Counter('post_views_total', 'Total views of posts')
 app.config['SECRET_KEY'] = 'your secret key'
+
+# Function to get a post from database
+def get_post(post_id):
+    connection = sqlite3.connect('database.db')
+    db_connection_count.inc() # Increment DB connection counter
+    connection.row_factory = sqlite3.Row
+    post = connection.execute('SELECT * FROM posts WHERE id = (?)', (post_id,)).fetchone()
+    connection.close()
+    return post
 
 # Define the main route of the web application 
 @app.route('/')
@@ -35,14 +51,18 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    if post is None:
-      return render_template('404.html'), 404
+    if post:
+        app.logger.info('Article "%s" retrieved!', post['title'])
+        post_views_total.inc()
+        return render_template('post.html', post=post)
     else:
-      return render_template('post.html', post=post)
+        app.logger.error('Article with id "%s" does not exist! Returning 404.', post_id)
+        return render_template('404.html'), 404
 
-# Define the About Us page
+# Define About Us page
 @app.route('/about')
 def about():
+    app.logger.info('The "About Us" page was retrieved.')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -56,15 +76,42 @@ def create():
             flash('Title is required!')
         else:
             connection = get_db_connection()
+            db_connection_count.inc()
             connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                         (title, content))
+                            (title, content))
             connection.commit()
             connection.close()
-
+            app.logger.info('New article "%s" created!', title)
             return redirect(url_for('index'))
 
+    app.logger.info('The "Create new post" page was retrieved (GET request).')
     return render_template('create.html')
+
+# Define Health Check Endpoint
+@app.route('/healthz')
+def healthz():
+    response = app.response_class(
+        response=json.dumps({"result": "OK - healthy"}),
+        status=200,
+        mimetype='application/json'
+    )
+    app.logger.info('Healthz endpoint was reached.')
+    return response
+
+# Define Metrics Endpoint
+@app.route('/metrics')
+def metrics():
+    response = app.response_class(
+        response=generate_latest(),
+        status=200,
+        mimetype='text/plain; version=0.0.4; charset=utf-8'
+    )
+    app.logger.info('Metrics endpoint was reached.')
+    return response
+
+# Define Logging Configuration
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', stream=sys.stdout) # Mengatur DEBUG level dan stream ke stdout
 
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+    app.run(host='0.0.0.0', port='3111')

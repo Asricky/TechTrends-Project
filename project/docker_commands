@@ -1,11 +1,61 @@
 ## Docker commands used to build the application 
 # TODO: insert the docker build command
+docker build -t techtrends .
 
 ## Docker commands used to run the application
 # TODO: insert the docker run command
+docker run -d -p 7111:3111 --name techtrends-app techtrends
 
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
+docker logs techtrends-app
 
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container 
+2025-07-15 09:43:35,789 - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-07-15 09:43:35,789 - INFO -  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+2025-07-15 09:43:55,046 - INFO - 172.17.0.1 - - [15/Jul/2025 09:43:55] "GET / HTTP/1.1" 200 -
+2025-07-15 09:43:55,068 - INFO - 172.17.0.1 - - [15/Jul/2025 09:43:55] "GET /static/css/main.css HTTP/1.1" 200 -
+2025-07-15 09:43:56,551 - INFO - 172.17.0.1 - - [15/Jul/2025 09:43:56] "GET /favicon.ico HTTP/1.1" 404 -
+2025-07-15 09:44:47,715 - INFO - The "About Us" page was retrieved.
+2025-07-15 09:44:47,720 - INFO - 172.17.0.1 - - [15/Jul/2025 09:44:47] "GET /about HTTP/1.1" 200 -
+2025-07-15 09:44:47,739 - INFO - 172.17.0.1 - - [15/Jul/2025 09:44:47] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:44:56,838 - INFO - 172.17.0.1 - - [15/Jul/2025 09:44:56] "GET / HTTP/1.1" 200 -
+2025-07-15 09:44:56,855 - INFO - 172.17.0.1 - - [15/Jul/2025 09:44:56] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:01,643 - INFO - Article "Kubernetes Certification" retrieved!
+2025-07-15 09:45:01,647 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:01] "GET /6 HTTP/1.1" 200 -
+2025-07-15 09:45:01,663 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:01] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:03,328 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:03] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:03,345 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:03] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:04,304 - INFO - Article "KubeCon + CloudNativeCon 2021" retrieved!
+2025-07-15 09:45:04,304 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:04] "GET /2 HTTP/1.1" 200 -
+2025-07-15 09:45:04,320 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:04] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:05,602 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:05] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:05,621 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:05] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:07,254 - INFO - Article "2020 CNCF Annual Report" retrieved!
+2025-07-15 09:45:07,255 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:07] "GET /1 HTTP/1.1" 200 -
+2025-07-15 09:45:07,273 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:07] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:08,265 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:08] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:08,285 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:08] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:09,526 - INFO - Article "Kubernetes v1.20 Release Notes" retrieved!
+2025-07-15 09:45:09,526 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:09] "GET /3 HTTP/1.1" 200 -
+2025-07-15 09:45:09,543 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:09] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:10,679 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:10] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:10,696 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:10] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:12,075 - INFO - Article "CNCF Cloud Native Interactive Landscape" retrieved!
+2025-07-15 09:45:12,076 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:12] "GET /4 HTTP/1.1" 200 -
+2025-07-15 09:45:12,091 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:12] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:13,511 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:13] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:13,531 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:13] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:19,145 - INFO - The "Create new post" page was retrieved (GET request).
+2025-07-15 09:45:19,147 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:19] "GET /create HTTP/1.1" 200 -
+2025-07-15 09:45:19,164 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:19] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:33,902 - INFO - New article "Langit Cerah" created!
+2025-07-15 09:45:33,903 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:33] "POST /create HTTP/1.1" 302 -
+2025-07-15 09:45:33,908 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:33] "GET / HTTP/1.1" 200 -
+2025-07-15 09:45:33,928 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:33] "GET /static/css/main.css HTTP/1.1" 304 -
+2025-07-15 09:45:51,546 - INFO - Healthz endpoint was reached.
+2025-07-15 09:45:51,546 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:51] "GET /healthz HTTP/1.1" 200 -
+2025-07-15 09:45:57,179 - INFO - Metrics endpoint was reached.
+2025-07-15 09:45:57,179 - INFO - 172.17.0.1 - - [15/Jul/2025 09:45:57] "GET /metrics HTTP/1.1" 200 -

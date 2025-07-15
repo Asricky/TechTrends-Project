@@ -1,0 +1,28 @@
+name: "TechTrends - Package with Docker"
+
+on:
+  push: # Trigger pada setiap push
+    branches:
+      - main # Hanya pada branch 'main'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest # Jalankan pada sistem operasi ubuntu-latest
+
+    steps:
+    - name: Checkout repository # Langkah pertama: clone kode dari repositori
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub # Langkah kedua: login ke Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }} # Menggunakan secret untuk username
+        password: ${{ secrets.DOCKER_PASSWORD }} # Menggunakan secret untuk password/token
+
+    - name: Build and push Docker image # Langkah ketiga: build dan push image Docker
+      uses: docker/build-push-action@v5
+      with:
+        context: ./project/techtrends # Konteks build: direktori aplikasi TechTrends
+        file: ./project/techtrends/Dockerfile # Lokasi Dockerfile
+        push: true # Lakukan push ke Docker Hub
+        tags: ${{ secrets.DOCKER_USERNAME }}/techtrends:latest # Tag image: username_dockerhub/techtrends:latest
