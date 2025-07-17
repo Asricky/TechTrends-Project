@@ -11,7 +11,7 @@ spec:
     path: project/helm
     helm:
       valueFiles:
-        - values-prod.yaml 
+        - project/helm/values-prod.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: prod 
