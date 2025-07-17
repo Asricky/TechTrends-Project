@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }} # Menggunakan nama rilis Helm sebagai nama Deployment
+  namespace: {{ .Values.namespace.name }} # Parameterized
+spec:
+  replicas: {{ .Values.replicaCount }} # Parameterized
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }} # Menggunakan nama rilis Helm sebagai label app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }} # Menggunakan nama rilis Helm sebagai label app
+    spec:
+      containers:
+      - name: {{ .Release.Name }} # Menggunakan nama rilis Helm sebagai nama container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" # Parameterized
+        imagePullPolicy: {{ .Values.image.pullPolicy }} # Parameterized
+        ports:
+        - containerPort: {{ .Values.containerPort }} # Parameterized
+        resources:
+          requests:
+            cpu: "{{ .Values.resources.requests.cpu }}" # Parameterized
+            memory: "{{ .Values.resources.requests.memory }}" # Parameterized
+          limits:
+            cpu: "{{ .Values.resources.limits.cpu }}" # Parameterized
+            memory: "{{ .Values.resources.limits.memory }}" # Parameterized
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbe.path }} # Parameterized
+            port: {{ .Values.containerPort }} # Menggunakan port container
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.readinessProbe.path }} # Parameterized
+            port: {{ .Values.containerPort }} # Menggunakan port container
+          initialDelaySeconds: 5
+          periodSeconds: 10

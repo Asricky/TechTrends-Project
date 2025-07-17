@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }} # Menggunakan nama rilis Helm
+  namespace: {{ .Values.namespace.name }} # Parameterized
+spec:
+  selector:
+    app: {{ .Release.Name }} # Menggunakan nama rilis Helm sebagai selector
+  ports:
+  - protocol: {{ .Values.service.protocol }} # Parameterized
+    port: {{ .Values.service.port }} # Parameterized
+    targetPort: {{ .Values.service.targetPort }} # Parameterized
+  type: {{ .Values.service.type }} # Parameterized

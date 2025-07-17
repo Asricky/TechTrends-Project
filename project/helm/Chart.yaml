@@ -1,0 +1,22 @@
+apiVersion: v1
+name: techtrends
+description: A Helm chart for the TechTrends application
+type: application # atau "library" jika ini chart yang bisa dipakai ulang
+
+# Versi aplikasi yang di-deploy oleh chart ini
+appVersion: "1.0.0"
+
+# Versi chart ini
+version: 1.0.0
+
+# Kata kunci (keywords)
+keywords:
+  - techtrends
+
+# Info pemelihara (Maintainers)
+maintainers:
+  - name: Lukas
+    email: lukasrcky@gmail.com
+
+sources:
+  - https://github.com/Asricky/TechTrends-Project.git
