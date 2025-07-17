@@ -10,6 +10,7 @@ spec:
     targetRevision: HEAD
     path: project/helm
     helm:
+      chart: .
       valueFiles:
         - project/helm/values-staging.yaml 
   destination:
