@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Asricky/TechTrends-Project.git
     targetRevision: HEAD
-    path: project/helm
+    path: project\helm
     helm:
       valueFiles:
         - values-prod.yaml 
