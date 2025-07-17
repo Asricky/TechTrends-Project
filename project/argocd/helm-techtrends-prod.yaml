@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://github.com/Asricky/TechTrends-Project.git
     targetRevision: HEAD
-    path: project\helm
+    path: project/helm
     helm:
       valueFiles:
-        - values-prod.yaml 
+        - helm/values-staging.yamlvalues-prod.yaml 
   destination:
     server: https://kubernetes.default.svc
     namespace: prod 
