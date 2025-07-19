@@ -10,9 +10,9 @@ spec:
     targetRevision: HEAD
 
     helm:
-      chart: project/helm
+      chart: helm
       valueFiles:
-        - ./values-prod.yaml
+        - values-prod.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: prod 
