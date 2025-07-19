@@ -10,7 +10,6 @@ spec:
     targetRevision: HEAD
 
     helm:
-      chart: project/helm
       valueFiles:
         - ../values-prod.yaml
   destination:
